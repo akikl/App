@@ -1,3 +1,4 @@
+import pip
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -14,7 +15,7 @@ device_order_file = st.sidebar.file_uploader("Upload Device Order Summary", type
 fos_file = st.sidebar.file_uploader("Upload Razorpay Agent App", type=["xlsx"])
 
 if device_order_file and fos_file:
-    device_order_data = pd.read_csv(device_order_file)
+    device_order_data = pd.read_excel(device_order_file)
     fos_data = pd.read_excel(fos_file, sheet_name='FOS Master Details')
 
     # Sidebar filters
@@ -24,7 +25,8 @@ if device_order_file and fos_file:
     device_model = st.sidebar.multiselect("Device model:", options=device_order_data["device_model"].unique(), default=device_order_data["device_model"].unique())
     reporting_manager = st.sidebar.multiselect("Reporting Manager:", options=device_order_data["Reporting Manager"].unique(), default=device_order_data["Reporting Manager"].unique())
 
-    device_order_data_selection = device_order_data.query("BH_Name == @bh & Zone == @zone & device_model == @device_model & Reporting Manager == @reporting_manager")
+    #device_order_data_selection = device_order_data.query("BH_Name == @bh & Zone == @zone & device_model == @device_model & Reporting Manager == @reporting_manager")
+    device_order_data_selection = device_order_data.query("BH_Name == @bh & Zone == @zone & device_model == @device_model & `Reporting Manager` == @reporting_manager")
 
     # KPI calculations
     total_device_orders = int(device_order_data_selection['device_count'].sum())
