@@ -10,7 +10,7 @@ st.markdown("##")
 
 # File upload
 st.sidebar.header("Upload Files")
-device_order_file = st.sidebar.file_uploader("Upload Device Order Summary", type=["csv"])
+device_order_file = st.sidebar.file_uploader("Upload Device Order Summary", type=["xlsx"])
 fos_file = st.sidebar.file_uploader("Upload Razorpay Agent App", type=["xlsx"])
 
 if device_order_file and fos_file:
